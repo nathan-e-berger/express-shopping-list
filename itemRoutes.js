@@ -24,9 +24,18 @@ router.get("/", function (req, res) {
  */
 
 router.post("/", function (req, res) {
-  const
-    items.push(req.body.name, req.body.price);
-  return res.send();
+    const item = req.body;
+    items.push(item);
+    return res.json(item);
 });
+
+router.get("/:name", function(req, res){
+  const item = req.params.name;
+  for(let foodItem in items){
+    if(item in foodItem){
+      return res.json(foodItem);
+    }
+  }
+})
 
 module.exports = router;
